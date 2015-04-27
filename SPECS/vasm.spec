@@ -1,5 +1,10 @@
-Name:		vasm-m68k_mot
-Version:	daily
+%define vasm_cpu m68k
+%define vasm_syntax mot
+
+%define today %(date '+%%y%%m%%d')
+
+Name:		vasm-%{vasm_cpu}_%{vasm_syntax}
+Version:	daily%{today}	
 Release:	1%{?dist}
 Summary:	Retargetable and portable assembler.
 
@@ -19,14 +24,14 @@ vasm is a portable and retargetable assembler to create linkable objects in vari
 %setup -n vasm -q
 
 %build
-export CPU=m68k
-export SYNTAX=mot
+export CPU=%{vasm_cpu}
+export SYNTAX=%{vasm_syntax}
 make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/opt/vbcc/bin
-install -m 755 vasmm68k_mot %{buildroot}/opt/vbcc/bin/
+install -m 755 vasm%{vasm_cpu}_%{vasm_syntax} %{buildroot}/opt/vbcc/bin/
 install -m 755 vobjdump %{buildroot}/opt/vbcc/bin/
 
 %clean
@@ -34,10 +39,9 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/opt/vbcc/bin/vasmm68k_mot
+/opt/vbcc/bin/vasm%{vasm_cpu}_%{vasm_syntax}
 /opt/vbcc/bin/vobjdump
 %doc
-
 
 %changelog
 
