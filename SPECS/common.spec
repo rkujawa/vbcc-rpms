@@ -7,5 +7,5 @@
 Group:		Development/Languages
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-BuildRequires:	gcc glibc-devel make gzip tar
+BuildRequires:	gcc glibc-devel make gzip tar lha
 
