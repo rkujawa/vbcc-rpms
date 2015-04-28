@@ -1,7 +1,7 @@
-%define vasm_cpu m68k
-%define vasm_syntax mot
+%include common.spec
 
-%define today %(date '+%%y%%m%%d')
+%define vasm_cpu %{target_cpu}
+%define vasm_syntax %{target_asm_syntax}
 
 Name:		vasm-%{vasm_cpu}_%{vasm_syntax}
 Version:	daily%{today}	
@@ -14,7 +14,7 @@ URL:		http://sun.hasenbraten.de/vasm/
 Source0:	vasm.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-BuildRequires:	gcc glibc-devel make gzip tar
+#BuildRequires:	gcc glibc-devel make gzip tar
 Requires:	glibc
 
 %description
